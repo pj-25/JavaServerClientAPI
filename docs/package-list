@@ -1,0 +1,5 @@
+jsc.jconnection
+jsc.jconnection.eventHandler
+jsc.jconnection.messageHandler
+jsc.jconnection.objectParser
+jsc.jserver
