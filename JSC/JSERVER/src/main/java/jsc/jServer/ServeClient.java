@@ -1,4 +1,4 @@
-package jsc.jserver;
+package jsc.jServer;
 
 import java.io.IOException;
 import java.net.Socket;

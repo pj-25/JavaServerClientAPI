@@ -1,4 +1,4 @@
-package jsc.jserver;
+package jsc.jServer;
 
 @FunctionalInterface
 public interface ResponseSender {

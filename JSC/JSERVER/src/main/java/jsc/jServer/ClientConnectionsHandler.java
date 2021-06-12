@@ -1,4 +1,4 @@
-package jsc.jserver;
+package jsc.jServer;
 
 import jsc.jconnection.SocketConnection;
 
