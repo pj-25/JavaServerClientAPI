@@ -44,24 +44,24 @@ public class JEventManager implements JMessageConsumer {
         notifyAllConsumers(eventCode.getCode(), eventData);
     }
 
-    public void register(JEventCode jEventCode, JEventConsumer eventConsumer){
+    public void bind(JEventCode jEventCode, JEventConsumer eventConsumer){
         if(!eventMap.containsKey(jEventCode.getCode())){
             eventMap.put(jEventCode.getCode(), new ArrayList<>());
         }
         getAllEventConsumers(jEventCode).add(eventConsumer);
     }
 
-    public void registerAll(JEventCode jEventCode, JEventConsumer ... eventConsumers){
+    public void bindAll(JEventCode jEventCode, JEventConsumer ... eventConsumers){
         for(JEventConsumer jEventConsumer:eventConsumers){
-            register(jEventCode, jEventConsumer);
+            bind(jEventCode, jEventConsumer);
         }
     }
 
-    public void remove(JEventCode jEventCode, JEventConsumer jEventConsumer){
+    public void unbind(JEventCode jEventCode, JEventConsumer jEventConsumer){
         getAllEventConsumers(jEventCode).remove(jEventConsumer);
     }
 
-    public void removeAll(JEventCode jEventCode){
+    public void unbindAll(JEventCode jEventCode){
         eventMap.remove(jEventCode.getCode());
     }
 
