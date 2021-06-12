@@ -1,5 +1,6 @@
 package jsc.jConnection;
 
+import jsc.jEventManager.JEventManager;
 import jsc.jMessageHandler.JMessageConsumer;
 
 import java.io.DataInputStream;
@@ -22,10 +23,24 @@ public class JConnection implements JMessageConsumer {
         messageDecoder = msgDecoder;
     }
 
-    public JConnection(){}
+    public JConnection(Socket socket) throws IOException {
+        this(socket, new JEventManager());
+    }
+
+    public JConnection(){
+        messageDecoder = new JEventManager();
+    }
 
     public JConnection(String connectionIP, int connectionPort, JMessageConsumer msgDecoder) throws IOException{
         this(new Socket(connectionIP, connectionPort), msgDecoder);
+    }
+
+    public JConnection(String connectionIP, int connectionPort) throws IOException {
+        this(connectionIP, connectionPort, new JEventManager());
+    }
+
+    public JConnection(String connectionID, Socket socket) throws IOException {
+        this(connectionID, socket, new JEventManager());
     }
 
     public JConnection(String connectionID, Socket socket, JMessageConsumer msgDecoder) throws IOException {
@@ -117,6 +132,18 @@ public class JConnection implements JMessageConsumer {
 
     public void setMessageDecoder(JMessageConsumer messageDecoder) {
         this.messageDecoder = messageDecoder;
+    }
+
+
+    /**
+     * Only applicable when @see #messageDecoder is set to JEventManager
+     * @return JEventConsumer
+     */
+    public JEventManager getJEventManager(){
+        if(messageDecoder instanceof JEventManager){
+            return (JEventManager) messageDecoder;
+        }
+        return null;
     }
 
     public void accept(String msg) {
