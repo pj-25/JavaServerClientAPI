@@ -136,7 +136,7 @@ public class JConnection implements JMessageConsumer {
 
 
     /**
-     * Only applicable when @see #messageDecoder is set to JEventManager
+     * Only applicable when messageDecoder is set to @see {@link jsc.jEventManager.JEventManager}
      * @return JEventConsumer
      */
     public JEventManager getJEventManager(){
