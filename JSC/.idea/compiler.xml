@@ -11,7 +11,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="JClient" target="8" />
       <module name="JConnection" target="8" />
+      <module name="JEventManager" target="8" />
       <module name="JSERVER" target="8" />
     </bytecodeTargetLevel>
   </component>

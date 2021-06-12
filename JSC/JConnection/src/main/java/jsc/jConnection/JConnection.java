@@ -1,13 +1,13 @@
-package jsc.jconnection;
+package jsc.jConnection;
 
-import jsc.jconnection.messageHandler.MessageConsumer;
+import jsc.jMessageHandler.JMessageConsumer;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class SocketConnection implements MessageConsumer {
+public class JConnection implements JMessageConsumer {
 
     private String connectionID;
     private Socket socket;
@@ -15,20 +15,20 @@ public class SocketConnection implements MessageConsumer {
     private DataInputStream dataInputStream;
     private boolean isConnected = false;
 
-    private MessageConsumer messageDecoder;
+    private JMessageConsumer messageDecoder;
 
-    public SocketConnection(Socket socket, MessageConsumer msgDecoder) throws IOException{
+    public JConnection(Socket socket, JMessageConsumer msgDecoder) throws IOException{
         connect(socket);
         messageDecoder = msgDecoder;
     }
 
-    public SocketConnection(){}
+    public JConnection(){}
 
-    public SocketConnection(String connectionIP, int connectionPort, MessageConsumer msgDecoder) throws IOException{
+    public JConnection(String connectionIP, int connectionPort, JMessageConsumer msgDecoder) throws IOException{
         this(new Socket(connectionIP, connectionPort), msgDecoder);
     }
 
-    public SocketConnection(String connectionID, Socket socket, MessageConsumer msgDecoder) throws IOException {
+    public JConnection(String connectionID, Socket socket, JMessageConsumer msgDecoder) throws IOException {
         this(socket, msgDecoder);
         setConnectionID(connectionID);
     }
@@ -44,7 +44,7 @@ public class SocketConnection implements MessageConsumer {
         run(this);
     }
 
-    public void run(MessageConsumer msgDecoder){
+    public void run(JMessageConsumer msgDecoder){
         new Thread(()->{
             isConnected = true;
             try{
@@ -111,11 +111,11 @@ public class SocketConnection implements MessageConsumer {
         isConnected = connected;
     }
 
-    public MessageConsumer getMessageDecoder() {
+    public JMessageConsumer getMessageDecoder() {
         return messageDecoder;
     }
 
-    public void setMessageDecoder(MessageConsumer messageDecoder) {
+    public void setMessageDecoder(JMessageConsumer messageDecoder) {
         this.messageDecoder = messageDecoder;
     }
 

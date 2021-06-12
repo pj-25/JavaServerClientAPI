@@ -1,12 +1,11 @@
-package jsc.jconnection.eventHandler;
+package jsc.jEventManager;
 
 
-import jsc.jconnection.messageHandler.MessageCode;
+import jsc.jMessageHandler.JMessageCode;
 
 import java.util.HashMap;
 
-public enum EventType implements MessageCode {
-
+public enum JEventType implements JMessageCode {
 
     FAILED(0),
     SUCCESS(1),
@@ -20,7 +19,7 @@ public enum EventType implements MessageCode {
 
     final private int EVENT_CODE;
 
-    EventType(int eventCode){
+    JEventType(int eventCode){
         this.EVENT_CODE = eventCode;
     }
 
@@ -29,15 +28,15 @@ public enum EventType implements MessageCode {
         return EVENT_CODE;
     }
 
-    private static HashMap<Integer, EventType> eventTypeMap = new HashMap<>();
+    private static HashMap<Integer, JEventType> eventTypeMap = new HashMap<>();
 
     static{
-        for(EventType eventType: EventType.values()){
-            eventTypeMap.put(eventType.getCode(), eventType);
+        for(JEventType JEventType : JEventType.values()){
+            eventTypeMap.put(JEventType.getCode(), JEventType);
         }
     }
 
-    static public EventType get(int i){
+    static public JEventType get(int i){
         return eventTypeMap.get(i);
     }
 }

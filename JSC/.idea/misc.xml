@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/../JConnection/pom.xml" />
         <option value="$PROJECT_DIR$/JConnection/pom.xml" />
         <option value="$PROJECT_DIR$/JSERVER/pom.xml" />
+        <option value="$PROJECT_DIR$/JConnection/JEventHandler/pom.xml" />
       </list>
     </option>
   </component>

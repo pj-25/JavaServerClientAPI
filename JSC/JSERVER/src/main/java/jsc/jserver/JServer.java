@@ -91,7 +91,7 @@ public class JServer implements ServeClient {
     }
 
     public void start(){
-        System.out.println("Server started on "+ getDefaultServerPort());
+        System.out.println("Server started on "+ getDefaultServerPort()+"...");
         isRunning = true;
         while(isRunning){
             try{

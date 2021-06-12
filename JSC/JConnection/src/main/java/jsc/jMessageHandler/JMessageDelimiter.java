@@ -1,6 +1,6 @@
-package jsc.jconnection.messageHandler;
+package jsc.jMessageHandler;
 
-public enum MessageDelimiter {
+public enum JMessageDelimiter {
 
     REQUEST_TYPE_DELIMITER("/"),
     RESPONSE_TYPE_DELIMITER("~"),
@@ -10,7 +10,7 @@ public enum MessageDelimiter {
     ;
     private final String delimiter;
 
-    MessageDelimiter(String delimiter){
+    JMessageDelimiter(String delimiter){
         this.delimiter = delimiter;
     }
 
