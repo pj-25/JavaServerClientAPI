@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/libs</output-path>
     <root id="archive" name="JConnection.jar">
       <element id="module-output" name="JConnection" />
-      <element id="library" level="project" name="libs" />
     </root>
   </artifact>
 </component>

@@ -1,9 +1,9 @@
 package jsc.jServer;
 
 
-import jsc.jconnection.SocketConnection;
+import jsc.jConnection.JConnection;
 
-abstract public class RequestManager extends SocketConnection implements ResponseSender{
+abstract public class JRequestManager extends JConnection implements JResponseSender {
 
     private String response;
     private boolean hasResponse = false;

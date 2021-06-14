@@ -5,22 +5,22 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class JServer implements ServeClient {
+public class JServer implements JSocketConsumer {
     public final static int DEFAULT_SERVER_PORT = 5656;     //Default port number
 
     private ServerSocket serverSocket;
-    private ServeClient serveClient;
+    private JSocketConsumer JSocketConsumer;
 
-    private Class<? extends RequestManager> requestHandler;
+    private Class<? extends JRequestManager> requestHandler;
 
     private boolean isRunning = false;
 
-    public JServer(int serverPort, Class<? extends RequestManager> requestHandler) throws IOException {
+    public JServer(int serverPort, Class<? extends JRequestManager> requestHandler) throws IOException {
         this(serverPort,socket-> {
             try{
-                RequestManager requestManagerObj =  createRequestHandler(requestHandler);
-                requestManagerObj.connect(socket);
-                requestManagerObj.run();
+                JRequestManager JRequestManagerObj =  createRequestHandler(requestHandler);
+                JRequestManagerObj.connect(socket);
+                JRequestManagerObj.run();
             }catch (RequestHandlerNotFound requestHandlerNotFound){
                 requestHandlerNotFound.printStackTrace();
                 System.exit(0);
@@ -29,7 +29,7 @@ public class JServer implements ServeClient {
         this.requestHandler = requestHandler;
     }
 
-    static public RequestManager createRequestHandler(Class< ? extends RequestManager> requestHandler) throws RequestHandlerNotFound{
+    static public JRequestManager createRequestHandler(Class< ? extends JRequestManager> requestHandler) throws RequestHandlerNotFound{
         try {
             return requestHandler.getDeclaredConstructor().newInstance();
         } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
@@ -38,20 +38,20 @@ public class JServer implements ServeClient {
     }
 
     public JServer(int serverPort) throws IOException{
-        this(serverPort, (ServeClient) null);
+        this(serverPort, (JSocketConsumer) null);
     }
 
     public JServer() throws IOException{
-        this(DEFAULT_SERVER_PORT, (ServeClient) null);
+        this(DEFAULT_SERVER_PORT, (JSocketConsumer) null);
     }
 
-    public JServer(Class<? extends RequestManager> requestHandler) throws IOException{
+    public JServer(Class<? extends JRequestManager> requestHandler) throws IOException{
         this(DEFAULT_SERVER_PORT, requestHandler);
     }
 
-    public JServer(int serverPort, ServeClient serveClient) throws IOException{
+    public JServer(int serverPort, JSocketConsumer JSocketConsumer) throws IOException{
         serverSocket = new ServerSocket(serverPort);
-        this.serveClient = serveClient;
+        this.JSocketConsumer = JSocketConsumer;
     }
 
     public static int getDefaultServerPort() {
@@ -74,20 +74,20 @@ public class JServer implements ServeClient {
         isRunning = running;
     }
 
-    public Class<? extends RequestManager> getRequestHandler() {
+    public Class<? extends JRequestManager> getRequestHandler() {
         return requestHandler;
     }
 
-    public void setRequestHandler(Class<? extends RequestManager> requestHandler) {
+    public void setRequestHandler(Class<? extends JRequestManager> requestHandler) {
         this.requestHandler = requestHandler;
     }
 
-    public ServeClient getServeClient() {
-        return serveClient;
+    public JSocketConsumer getServeClient() {
+        return JSocketConsumer;
     }
 
-    public void setServeClient(ServeClient serveClient) {
-        this.serveClient = serveClient;
+    public void setServeClient(JSocketConsumer JSocketConsumer) {
+        this.JSocketConsumer = JSocketConsumer;
     }
 
     public void start(){
@@ -117,11 +117,11 @@ public class JServer implements ServeClient {
 
     @Override
     public void serve(Socket socket) {
-        if(serveClient!=null){
+        if(JSocketConsumer !=null){
             new Thread(()->{
                 try {
                     System.out.println("Socket accepted: "+socket);
-                    serveClient.serve(socket);
+                    JSocketConsumer.serve(socket);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }

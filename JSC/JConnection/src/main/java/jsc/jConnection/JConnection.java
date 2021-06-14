@@ -19,6 +19,9 @@ public class JConnection implements JMessageConsumer {
     private DataInputStream dataInputStream;
     private boolean isConnected = false;
 
+    private final Object interruptReadLock = new Object();
+    private boolean isReadInterrupted = false;
+
     private JMessageConsumer messageDecoder;
 
     public JConnection(Socket socket, JMessageConsumer msgDecoder) throws IOException{
@@ -67,6 +70,7 @@ public class JConnection implements JMessageConsumer {
             isConnected = true;
             try{
                 while(isConnected){
+                    checkIfReadInterrupted();
                     msgDecoder.accept(read());
                 }
             }catch(IOException e){
@@ -79,6 +83,40 @@ public class JConnection implements JMessageConsumer {
 
     public String read() throws IOException{
         return dataInputStream.readUTF();
+    }
+
+    private void checkIfReadInterrupted(){
+        synchronized (interruptReadLock){
+            while (isReadInterrupted()){
+                try{
+                    interruptReadLock.wait();
+                }catch (InterruptedException readWaitInterruptException){
+                    readWaitInterruptException.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void setReadInterrupt(boolean readInterruptStatus){
+        setIsReadInterrupted(readInterruptStatus);
+        if(!readInterruptStatus){
+            resumeRead();
+        }
+    }
+
+    private void resumeRead(){
+        synchronized (interruptReadLock){
+            setIsReadInterrupted(false);
+            interruptReadLock.notifyAll();
+        }
+    }
+
+    public boolean isReadInterrupted() {
+        return isReadInterrupted;
+    }
+
+    private void setIsReadInterrupted(boolean readInterrupted) {
+        isReadInterrupted = readInterrupted;
     }
 
     public void write(String data){

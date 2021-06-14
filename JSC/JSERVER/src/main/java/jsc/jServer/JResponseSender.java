@@ -1,6 +1,6 @@
 package jsc.jServer;
 
 @FunctionalInterface
-public interface ResponseSender {
+public interface JResponseSender {
     void send(String res);
 }
