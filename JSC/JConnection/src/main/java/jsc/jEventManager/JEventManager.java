@@ -14,7 +14,13 @@ public class JEventManager implements JMessageConsumer {
 
     private JMessageConsumer messageConsumer;
 
-    public JEventManager(){}
+    public JEventManager(){
+        setMessageConsumer((msg) ->{
+            String[] eventData = JMessageFormatHandler.decode(JMessageDelimiter.EVENT_TYPE_DELIMITER, msg, 2);
+            int eventTypeCode = Integer.parseInt(eventData[0]);
+            notifyAllConsumers(eventTypeCode, eventData[1]);
+        });
+    }
 
     public JEventManager(JMessageConsumer jMessageConsumer){
         this.messageConsumer = jMessageConsumer;
@@ -22,13 +28,7 @@ public class JEventManager implements JMessageConsumer {
 
     @Override
     public void accept(String msg){
-        if(messageConsumer!=null){
-            messageConsumer.accept(msg);
-        }else{
-            String[] eventData = JMessageFormatHandler.decode(JMessageDelimiter.EVENT_TYPE_DELIMITER, msg, 2);
-            int eventTypeCode = Integer.parseInt(eventData[0]);
-            notifyAllConsumers(eventTypeCode, eventData[1]);
-        }
+        messageConsumer.accept(msg);
     }
 
     public void notifyAllConsumers(int eventTypeCode, String eventData){

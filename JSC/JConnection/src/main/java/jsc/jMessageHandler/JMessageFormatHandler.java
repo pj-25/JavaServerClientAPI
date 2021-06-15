@@ -1,6 +1,7 @@
 package jsc.jMessageHandler;
 
 
+import jsc.jEventManager.JEventCode;
 import jsc.jEventManager.JEventType;
 import jsc.jObjectParser.JObjectParser;
 
@@ -27,6 +28,10 @@ public class JMessageFormatHandler {
     //encode format--> MESSAGE_TYPE:MSG_DATA
     public static String encode(JMessageDelimiter sep, JMessageCode msgType, String...msgData){
         return msgType.getCode()+ JMessageDelimiter.REQUEST_TYPE_DELIMITER.toString() + encode(sep, msgData);
+    }
+
+    public static String encode(JEventCode jEventCode, String... eventData){
+        return jEventCode.getCode() + JMessageDelimiter.EVENT_TYPE_DELIMITER.toString() + encode(eventData);
     }
 
     //encode format--> MESSAGE_TYPE{sep}EVENT_TYPE{sep}MSG_DATA

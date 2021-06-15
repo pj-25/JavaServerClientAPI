@@ -8,7 +8,7 @@ public enum JMessageType implements JMessageCode {
     INVALID_MSG(-1),
     FAILED(0),
     SUCCESS(1),
-    INTERRUPT_READ(2),
+    READ_INTERRUPT(2),
     FILE_TRANSFER(3),
     GET(3),
     PUT(4),

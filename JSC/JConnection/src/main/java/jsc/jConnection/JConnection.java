@@ -11,13 +11,14 @@ import java.net.Socket;
 /**
  * @author Joshi Prashant
  */
-public class JConnection implements JMessageConsumer {
+public class JConnection implements JMessageConsumer, JCloseEventConsumer {
 
     private String connectionID;
     private Socket socket;
     private DataOutputStream dataOutputStream;
     private DataInputStream dataInputStream;
     private boolean isConnected = false;
+    private JCloseEventConsumer jCloseEventConsumer;
 
     private final Object interruptReadLock = new Object();
     private boolean isReadInterrupted = false;
@@ -40,6 +41,7 @@ public class JConnection implements JMessageConsumer {
     public JConnection(String connectionIP, int connectionPort, JMessageConsumer msgDecoder) throws IOException{
         this(new Socket(connectionIP, connectionPort), msgDecoder);
     }
+
 
     public JConnection(String connectionIP, int connectionPort) throws IOException {
         this(connectionIP, connectionPort, new JEventManager());
@@ -75,7 +77,7 @@ public class JConnection implements JMessageConsumer {
                 }
             }catch(IOException e){
                 isConnected = false;
-                close();
+                onClose();
                 System.err.println(getConnectionID()+" disconnected!");
             }
         }).start();
@@ -193,11 +195,20 @@ public class JConnection implements JMessageConsumer {
         }
     }
 
-    public void close(){
+    @Override
+    public void onClose(){
         try{
+            if(jCloseEventConsumer!=null){
+                jCloseEventConsumer.onClose();
+            }
             socket.close();
         }catch (IOException e){
             System.err.println(e);
         }
     }
+
+    public void setOnClose(JCloseEventConsumer jCloseEventConsumer){
+        this.jCloseEventConsumer = jCloseEventConsumer;
+    }
+
 }

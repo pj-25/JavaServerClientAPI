@@ -2,19 +2,22 @@ package jsc.jConnection;
 
 import java.io.IOException;
 
+
 class JConnectionTest {
 
     JConnection jConnection;
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() throws IOException {
-        jConnection = new JConnection("127.0.0.1", 5656, System.out::println);
+        jConnection = new JConnection("127.0.0.1", 5656, (msg)->{
+            System.out.println("Using read thread:" +msg);
+        });
         jConnection.run();
     }
 
     @org.junit.jupiter.api.AfterEach
     void tearDown() {
-        jConnection.close();
+        jConnection.onClose();
     }
 
     @org.junit.jupiter.api.Test

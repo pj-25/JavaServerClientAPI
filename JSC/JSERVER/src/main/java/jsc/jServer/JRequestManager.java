@@ -8,7 +8,7 @@ abstract public class JRequestManager extends JConnection implements JResponseSe
     private String response;
     private boolean hasResponse = false;
 
-    private ClientConnectionsHandler clientConnectionsHandler = new ClientConnectionsHandler();
+    private JClientConnectionsHandler JClientConnectionsHandler = new JClientConnectionsHandler();
 
     @Override
     abstract public void accept(String req);
@@ -32,11 +32,11 @@ abstract public class JRequestManager extends JConnection implements JResponseSe
         write(res);
     }
 
-    public ClientConnectionsHandler getClientConnectionsHandler() {
-        return clientConnectionsHandler;
+    public JClientConnectionsHandler getClientConnectionsHandler() {
+        return JClientConnectionsHandler;
     }
 
-    public void setClientConnectionsHandler(ClientConnectionsHandler ccHandler) {
-        clientConnectionsHandler = ccHandler;
+    public void setClientConnectionsHandler(JClientConnectionsHandler ccHandler) {
+        JClientConnectionsHandler = ccHandler;
     }
 }
