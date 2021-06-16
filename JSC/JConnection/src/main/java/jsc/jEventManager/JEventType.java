@@ -1,11 +1,8 @@
 package jsc.jEventManager;
 
-
-import jsc.jMessageHandler.JMessageCode;
-
 import java.util.HashMap;
 
-public enum JEventType implements JMessageCode {
+public enum JEventType implements JEventCode{
 
     FAILED(0),
     SUCCESS(1),
@@ -15,6 +12,7 @@ public enum JEventType implements JMessageCode {
     UPDATED(4),
     NOT_UPDATED(5),
     ENTITY_LIST_TRANSFER(6),
+    CLOSE(7),
     ;
 
     final private int EVENT_CODE;

@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class JClientConnectionsHandler extends HashMap<String, JConnection> {
     public void closeAll(){
-        applyToAll((JConnection::onClose));
+        applyToAll((JConnection::close));
     }
 
     public void publish(String msg){

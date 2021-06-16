@@ -1,6 +1,5 @@
 package jsc.jEventManager;
 
-import jsc.jMessageHandler.JMessageConsumer;
 import jsc.jMessageHandler.JMessageDelimiter;
 import jsc.jMessageHandler.JMessageFormatHandler;
 
@@ -8,11 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class JEventManager implements JMessageConsumer {
+public class JEventManager implements JEventConsumer {
 
     private HashMap<Integer, List<JEventConsumer>> eventMap = new HashMap<>();
 
-    private JMessageConsumer messageConsumer;
+    private JEventConsumer messageConsumer;
 
     public JEventManager(){
         setMessageConsumer((msg) ->{
@@ -22,7 +21,7 @@ public class JEventManager implements JMessageConsumer {
         });
     }
 
-    public JEventManager(JMessageConsumer jMessageConsumer){
+    public JEventManager(JEventConsumer jMessageConsumer){
         this.messageConsumer = jMessageConsumer;
     }
 
@@ -77,11 +76,11 @@ public class JEventManager implements JMessageConsumer {
         return eventMap;
     }
 
-    public JMessageConsumer getMessageConsumer() {
+    public JEventConsumer getMessageConsumer() {
         return messageConsumer;
     }
 
-    public void setMessageConsumer(JMessageConsumer messageConsumer) {
+    public void setMessageConsumer(JEventConsumer messageConsumer) {
         this.messageConsumer = messageConsumer;
     }
 

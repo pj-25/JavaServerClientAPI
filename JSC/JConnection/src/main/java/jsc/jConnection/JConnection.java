@@ -1,6 +1,5 @@
 package jsc.jConnection;
 
-import jsc.jEventManager.JEventManager;
 import jsc.jMessageHandler.JMessageConsumer;
 
 import java.io.DataInputStream;
@@ -18,7 +17,6 @@ public class JConnection implements JMessageConsumer, JCloseEventConsumer {
     private DataOutputStream dataOutputStream;
     private DataInputStream dataInputStream;
     private boolean isConnected = false;
-    private JCloseEventConsumer jCloseEventConsumer;
 
     private final Object interruptReadLock = new Object();
     private boolean isReadInterrupted = false;
@@ -31,11 +29,10 @@ public class JConnection implements JMessageConsumer, JCloseEventConsumer {
     }
 
     public JConnection(Socket socket) throws IOException {
-        this(socket, new JEventManager());
+        this(socket, null);
     }
 
     public JConnection(){
-        messageDecoder = new JEventManager();
     }
 
     public JConnection(String connectionIP, int connectionPort, JMessageConsumer msgDecoder) throws IOException{
@@ -44,16 +41,20 @@ public class JConnection implements JMessageConsumer, JCloseEventConsumer {
 
 
     public JConnection(String connectionIP, int connectionPort) throws IOException {
-        this(connectionIP, connectionPort, new JEventManager());
+        this(connectionIP, connectionPort, null);
     }
 
     public JConnection(String connectionID, Socket socket) throws IOException {
-        this(connectionID, socket, new JEventManager());
+        this(connectionID, socket, null);
     }
 
     public JConnection(String connectionID, Socket socket, JMessageConsumer msgDecoder) throws IOException {
         this(socket, msgDecoder);
         setConnectionID(connectionID);
+    }
+
+    public JConnection(JMessageConsumer msgDecoder) {
+        setMessageDecoder(msgDecoder);
     }
 
     public void connect(Socket clientSocket) throws IOException {
@@ -76,8 +77,9 @@ public class JConnection implements JMessageConsumer, JCloseEventConsumer {
                     msgDecoder.accept(read());
                 }
             }catch(IOException e){
-                isConnected = false;
-                onClose();
+                if(isConnected){
+                    close();
+                }
                 System.err.println(getConnectionID()+" disconnected!");
             }
         }).start();
@@ -177,38 +179,19 @@ public class JConnection implements JMessageConsumer, JCloseEventConsumer {
         this.messageDecoder = messageDecoder;
     }
 
-
-    /**
-     * Only applicable when messageDecoder is set to @see {@link jsc.jEventManager.JEventManager}
-     * @return JEventConsumer
-     */
-    public JEventManager getJEventManager(){
-        if(messageDecoder instanceof JEventManager){
-            return (JEventManager) messageDecoder;
-        }
-        return null;
-    }
-
     public void accept(String msg) {
         if(messageDecoder!=null){
             messageDecoder.accept(msg);
         }
     }
 
-    @Override
-    public void onClose(){
+    public void close(){
         try{
-            if(jCloseEventConsumer!=null){
-                jCloseEventConsumer.onClose();
-            }
+            isConnected = false;
             socket.close();
         }catch (IOException e){
             System.err.println(e);
         }
-    }
-
-    public void setOnClose(JCloseEventConsumer jCloseEventConsumer){
-        this.jCloseEventConsumer = jCloseEventConsumer;
     }
 
 }

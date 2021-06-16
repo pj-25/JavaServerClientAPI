@@ -17,7 +17,7 @@ class JConnectionTest {
 
     @org.junit.jupiter.api.AfterEach
     void tearDown() {
-        jConnection.onClose();
+        jConnection.close();
     }
 
     @org.junit.jupiter.api.Test
