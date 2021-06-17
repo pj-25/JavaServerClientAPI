@@ -1,7 +1,6 @@
 package jsc.jConnection;
 
 import jsc.jEventManager.*;
-import jsc.jMessageHandler.JMessageDelimiter;
 import jsc.jMessageHandler.JMessageFormatHandler;
 
 import java.io.IOException;
@@ -62,7 +61,7 @@ public class JConnectionManager extends JConnection implements JEventDataSender,
 
     @Override
     public void send(JEventCode eventCode, String eventData) {
-        write(JMessageFormatHandler.encode(JMessageDelimiter.EVENT_TYPE_DELIMITER, eventCode, eventData));
+        write(JMessageFormatHandler.encode(eventCode, eventData));
     }
 
     @Override
