@@ -12,7 +12,8 @@ public enum JEventType implements JEventCode{
     UPDATED(4),
     NOT_UPDATED(5),
     ENTITY_LIST_TRANSFER(6),
-    CLOSE(7),
+    CONNECT(7),
+    CLOSE(8),
     ;
 
     final private int EVENT_CODE;

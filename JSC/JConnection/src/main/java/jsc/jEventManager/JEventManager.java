@@ -36,6 +36,8 @@ public class JEventManager implements JEventConsumer {
             for(JEventConsumer jEventConsumer: consumers){
                 jEventConsumer.accept(eventData);
             }
+        }else{
+            System.out.println("No consumer found for "+JEventType.get(eventTypeCode) +"("+eventTypeCode+")");
         }
     }
 
@@ -88,4 +90,11 @@ public class JEventManager implements JEventConsumer {
         this.eventMap = eventMap;
     }
 
+    @Override
+    public String toString() {
+        return "JEventManager{" +
+                "eventMap=" + eventMap +
+                ", messageConsumer=" + messageConsumer +
+                '}';
+    }
 }
