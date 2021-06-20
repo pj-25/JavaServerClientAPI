@@ -1,6 +1,5 @@
 
 import jsc.jServer.JServer;
-
 import java.io.IOException;
 
 public class EchoServer {
