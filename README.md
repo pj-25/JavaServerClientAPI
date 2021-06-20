@@ -40,6 +40,46 @@ jsc
 5 directories, 23 files
 ```
 
+## Getting Started 
+
+* ### Server Side:
+    * Server implementation:
+    
+        * ```EchoServer.java```
+            ```java
+            import jsc.jServer.JServer;
+            import java.io.IOException;
+
+            public class EchoServer {
+                public static void main(String []s){
+                    try{
+                        JServer pingServer = new JServer(EchoJRequestManagerImpl.class);
+                        pingServer.start();
+                    }catch (IOException e){
+                        System.out.println("Unable to start server :(");
+                    }
+                }
+            }
+            ```
+        * ```EchoJRequestManagerImpl.java```
+            ```java
+            import jsc.jServer.JRequestManager;
+
+            public class EchoJRequestManagerImpl extends JRequestManager {
+                @Override
+                public void accept(String msg){
+                    System.out.println("Received Request: "+msg);
+                    write(msg);
+                }
+            }
+            ```
+    * Run Server:
+        ```bash
+        javac -cp JSERVER.jar EchoJRequestManagerImpl.java
+        javac -cp JSERVER.jar:. EchoServer.java
+        java -cp JSERVER.jar:. EchoServer
+        ```
+
 ## Project Structure
 
 ```javascript
