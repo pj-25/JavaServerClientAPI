@@ -43,7 +43,7 @@ jsc
 ## Getting Started 
 
 * ### Server Side:
-    * Server implementation:
+    * #### Server implementation:
     
         * ```EchoServer.java```
             ```java
@@ -67,18 +67,74 @@ jsc
 
             public class EchoJRequestManagerImpl extends JRequestManager {
                 @Override
-                public void accept(String msg){
-                    System.out.println("Received Request: "+msg);
-                    write(msg);
+                public void accept(String req){    
+                    //write your logic here to serve the request
+                    
+                    System.out.println("Received Request: "+req);   
+                    write(req);
                 }
             }
             ```
-    * Run Server:
+        * Default server port: ```5656```
+    
+    * #### Run Server:
         ```bash
         javac -cp JSERVER.jar EchoJRequestManagerImpl.java
         javac -cp JSERVER.jar:. EchoServer.java
         java -cp JSERVER.jar:. EchoServer
         ```
+* ### Client Side: 
+    * #### Client implementation:
+        * ```TestRelayEchoClient.java```
+            ```java
+            import jsc.jConnection.JConnection;
+
+            import java.io.IOException;
+            import java.util.Scanner;
+
+            public class TestRelayEchoClient {
+
+                public static Scanner scanner = new Scanner(System.in);
+                public static void main(String []s){
+                    try{
+                        JConnection jConnection = new JConnection("127.0.0.1", 5656, (res)->{
+                            //write your logic here to consume the response
+                            System.out.println(res);
+                        });
+                        jConnection.run();
+                        System.out.println("Write your message and press enter...(write \"exit\" to stop)");
+                        String msg;
+                        while(jConnection.isConnected()){
+                            msg = scanner.nextLine();
+                            if(msg.equals("exit")){
+                                break;
+                            }
+                            jConnection.write(msg);
+                        }
+                        jConnection.close();
+                        System.out.println("----------- Bye :) -----------");
+                    }catch (IOException ioE){
+                        System.out.println("Server connection lost, check your network connection :(");
+                    }
+                }
+
+            }
+            ```
+        * Output:
+            ```
+            Write your message and press enter...(write "exit" to stop)
+            Hello, Server!
+            Hello, Server!
+            JSC is perfectly working :)
+            JSC is perfectly working :)
+            exit
+            ----------- Bye :) -----------
+            anonymous disconnected!
+            ```
+            
+## Proof of Concept: 
+
+1. [Gameholic](https://github.com/pj-25/Gameholic)
 
 ## Project Structure
 
