@@ -4,12 +4,6 @@
 
 [Jump to JavaDocs --->](https://pj-25.github.io/JavaServerClientAPI/docs)
 
-## JSC Architecture
-* ### System Design
-    ![JSC system architecture](https://github.com/pj-25/JavaServerClientAPI/blob/main/res/JSC-JSC_System_Architecture.png)
-* ### JSC Integration
-    ![JSC system integration](https://github.com/pj-25/JavaServerClientAPI/blob/main/res/JSC-JSC_Integration_System_Design.png)
-
 ## Library Structure
 
 ```javascript
@@ -45,6 +39,12 @@ jsc
 
 5 directories, 23 files
 ```
+
+## JSC Architecture
+* ### System Design
+    ![JSC system architecture](https://github.com/pj-25/JavaServerClientAPI/blob/main/res/JSC-JSC_System_Architecture.png)
+* ### JSC Integration
+    ![JSC system integration](https://github.com/pj-25/JavaServerClientAPI/blob/main/res/JSC-JSC_Integration_System_Design.png)
 
 ## Getting Started 
 
