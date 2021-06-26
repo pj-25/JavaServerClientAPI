@@ -10,10 +10,6 @@
 * ### JSC Integration
     ![JSC system integration](https://github.com/pj-25/JavaServerClientAPI/blob/main/res/JSC-JSC_Integration_System_Design.png)
 
-<figure class="video_container">
-    <iframe frameborder="0" style="width:100%;height:823px;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&page-id=69qUiCH-JHBWRA9TsmyE&title=JSC.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1uIEUrTdHvpXh_y__mUQbaaYIFAKHstqd%26export%3Ddownload"></iframe>
-</figure>
-
 ## Library Structure
 
 ```javascript
