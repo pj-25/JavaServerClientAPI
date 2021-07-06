@@ -1,10 +1,10 @@
-# JavaServerClientAPI
+# 📨 JavaServerClientAPI
 
 ![COMMIT_STATUS](https://img.shields.io/github/last-commit/pj-25/JavaServerClientAPI?style=for-the-badge)
 
-[Jump to JavaDocs --->](https://pj-25.github.io/JavaServerClientAPI/docs)
+📖 [Jump to JavaDocs --->](https://pj-25.github.io/JavaServerClientAPI/docs)
 
-## Library Structure
+## 📑 Library Structure
 
 ```javascript
 jsc
@@ -40,13 +40,13 @@ jsc
 5 directories, 23 files
 ```
 
-## JSC Architecture
+## 🏗️ JSC Architecture
 * ### System Design
     ![JSC system architecture](https://github.com/pj-25/JavaServerClientAPI/blob/main/res/JSC-JSC_System_Architecture.png)
 * ### JSC Integration
     ![JSC system integration](https://github.com/pj-25/JavaServerClientAPI/blob/main/res/JSC-JSC_Integration_System_Design.png)
 
-## Getting Started 
+## 🎢 Getting Started 
 
 * ### Server Side:
     * #### Server implementation:
@@ -138,11 +138,11 @@ jsc
             anonymous disconnected!
             ```
             
-## Proof of Concept: 
+## 🚀 Proof of Concept: 
 
 1. [Gameholic](https://github.com/pj-25/Gameholic)
 
-## Project Structure
+## 🗃️ Project Structure
 
 ```javascript
 JSC
