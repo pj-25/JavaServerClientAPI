@@ -40,6 +40,8 @@ jsc
 5 directories, 23 files
 ```
 
+> *click any of the above highlighted file to navigate to its source code
+
 ## 🏗️ JSC Architecture
 * ### System Design
     ![JSC system architecture](https://github.com/pj-25/JavaServerClientAPI/blob/main/res/JSC-JSC_System_Architecture.png)
@@ -255,3 +257,4 @@ JSC
 
 47 directories, 59 files
 ```
+> *click any of the above highlighted file to navigate to its source code
