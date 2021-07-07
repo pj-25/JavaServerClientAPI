@@ -146,6 +146,9 @@ jsc
 
 ## 🗃️ Project Structure
 
+![STATUS](https://img.shields.io/badge/status-under%20development-important)
+![IDE](https://img.shields.io/badge/IDE-IntellijIDEA-blueviolet)
+
 ```javascript
 JSC
 ├── JConnection
