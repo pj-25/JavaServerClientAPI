@@ -61,8 +61,8 @@ jsc
             public class EchoServer {
                 public static void main(String []s){
                     try{
-                        JServer pingServer = new JServer(EchoJRequestManagerImpl.class);
-                        pingServer.start();
+                        JServer echoServer = new JServer(EchoJRequestManagerImpl.class);
+                        echoServer.start();
                     }catch (IOException e){
                         System.out.println("Unable to start server :(");
                     }
