@@ -3,6 +3,7 @@ package jsc.jConnection;
 import java.io.IOException;
 
 
+@org.junit.jupiter.api.Disabled("Manual: needs EchoServer running on :5656. Automated coverage: JSERVER EchoRoundTripTest")
 class JConnectionTest {
 
     JConnection jConnection;
